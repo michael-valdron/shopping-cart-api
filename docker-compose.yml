@@ -1,0 +1,13 @@
+# Author: Michael Valdron
+#
+# Uses docker and docker-compose for dev deployment.
+version: '2'
+services: 
+    db_dev:
+        image: postgres:12.7-alpine
+        ports: 
+            - '${PGPORT}:5432'
+        volumes: 
+            - ./queries/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql
+        environment:
+            POSTGRES_PASSWORD: ${PGPASSWORD}
