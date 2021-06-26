@@ -8,7 +8,12 @@ export default class Item {
     private _price: number;
 
     static fromJson(json: ItemJson): Item {
-        return new Item(json.cart_id, json.item_label, json.item_price, json.item_id);
+        return new Item(
+            json.cart_id, 
+            json.item_label, 
+            Number.parseFloat(json.item_price), 
+            json.item_id
+        );
     }
 
     constructor(cartId: number, label: string, price: number, id: number | null = null) {
@@ -23,6 +28,8 @@ export default class Item {
      */
      public toJson(): any {
         return {
+            id: this._id,
+            chartId: this.cartId,
             label: this._label,
             price: util.roundTo(this._price, 2)
         }

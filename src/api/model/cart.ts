@@ -8,16 +8,31 @@ export default class Cart {
     private _taxes: number;
     private _total: number;
 
-    static fromJson(json: CartJson): Cart {
-        return new Cart(json.cart_subtotal, json.cart_discount, json.cart_taxes, json.cart_total, json.cart_id);
-    }
+    /**
+     * Calculates the total price of a cart.
+     * 
+     * @param subtotal - Subtotal amount of cart
+     * @param tax - Tax amount of cart
+     * @param discount - Discount percentage to apply
+     * @returns The total price of a cart after tax and discount is applied.
+     */
+    static calcTotalPrice = (subtotal: number, tax: number, discount: number): number =>
+        (subtotal+tax)-((subtotal+tax)*discount);
 
-    constructor(subtotal: number, discount: number, taxes: number, total: number, id: number | null = null) {
+    static fromJson = (json: CartJson): Cart =>
+        new Cart(
+            Number.parseFloat(json.cart_subtotal), 
+            Number.parseFloat(json.cart_discount), 
+            Number.parseFloat(json.cart_taxes),
+            Number.parseFloat(json.cart_total), 
+            json.cart_id);
+
+    constructor(subtotal: number, discount: number, taxes: number, total?: number, id?: number) {
         this._id = id;
         this._subtotal = subtotal;
         this._discount = discount;
         this._taxes = taxes;
-        this._total = total;
+        this._total = (typeof total !== 'number') ? Cart.calcTotalPrice(subtotal, taxes, discount) : total;
     }
 
     /**
@@ -25,6 +40,7 @@ export default class Cart {
      */
     public toJson(): any {
         return {
+            id: this._id,
             subtotal: util.roundTo(this._subtotal, 2),
             discount: util.roundTo(this._discount, 2),
             taxes: util.roundTo(this._taxes, 2),
