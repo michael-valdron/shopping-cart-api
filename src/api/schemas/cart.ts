@@ -1,7 +1,7 @@
 export type CartJson = {
     cart_id: number,
-    cart_subtotal: number,
-    cart_discount: number,
-    cart_taxes: number,
-    cart_total: number
+    cart_subtotal: string,
+    cart_discount: string,
+    cart_taxes: string,
+    cart_total: string
 }
