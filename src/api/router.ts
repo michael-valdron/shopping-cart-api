@@ -3,10 +3,22 @@ import path from "path"
 
 import view from "./routes/view"
 import add from "./routes/add"
+import edit from "./routes/edit"
+import checkout from "./routes/checkout"
 
 const BASE_URI = '/api';
+
+/**
+ * Main '/api' router.
+ */
 const router = Router();
 
+/**
+ * Handler for non existing APIs (status 404).
+ * 
+ * @param req - `Request`
+ * @param res - `Response`
+ */
 function notFound(req: Request, res: Response) {
     res.status(404).json({'error': 'api not found'});
 }
@@ -21,7 +33,13 @@ router.use(BASE_URI, add);
 // Add Read routes
 router.use(BASE_URI, view);
 
-// Add 404 responses
+// Add Update routes
+router.use(BASE_URI, edit);
+
+// Add Delete routes
+router.use(BASE_URI, checkout);
+
+// Add 404 routes
 router.get('*', notFound);
 router.post('*', notFound);
 router.put('*', notFound);
