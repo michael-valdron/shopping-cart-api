@@ -4,7 +4,7 @@ import * as util from "./util";
 import Cart from "../model/cart";
 import { CartJson } from "../schemas/cart";
 
-type CartParams = {
+export type CartParams = {
     subtotal?: number,
     discount?: number,
     taxes?: number,
@@ -30,13 +30,30 @@ export default class CartDao implements Dao<Cart> {
                     [id]  
                 ).catch((err) => util.query_err(err, reject));
 
-                if (result) resolve(Cart.fromJson(result.rows[0]));
+                if (result) {
+                    if (result.rowCount === 0)
+                        resolve(null);
+                    else
+                        resolve(Cart.fromJson(result.rows[0]));
+                }
             }
         });
     }
 
     readAll(): Promise<Cart[]> {
-        throw new Error('readAll not implemented for \'CartDao\'.');
+        return new Promise<Cart[]>(async (resolve, reject) => {
+            const client = await this._pool.connect().catch((err) => util.connect_error(err, reject));
+            if (client) {
+                const result = await client.query<CartJson>('SELECT * FROM carts;').catch((err) => util.query_err(err, reject));
+
+                if (result) {
+                    if (result.rowCount === 0)
+                        resolve([]);
+                    else
+                        resolve(result.rows.map(Cart.fromJson));
+                }
+            }
+        });
     }
 
     create(cart: Cart): Promise<Cart> {
@@ -57,7 +74,12 @@ export default class CartDao implements Dao<Cart> {
                     [cart.subtotal, cart.discount, cart.taxes, cart.total]
                 ).catch((err) => util.query_err(err, reject));
 
-                if (result) resolve(Cart.fromJson(result.rows[0]));
+                if (result) {
+                    if (result.rowCount === 0)
+                        resolve(null);
+                    else
+                        resolve(Cart.fromJson(result.rows[0]));
+                }
             }
         });
     }
@@ -73,14 +95,19 @@ export default class CartDao implements Dao<Cart> {
                 const result = await client.query<CartJson>(
                     `
                         UPDATE carts
-                        SET ${util.buildUpdateSetStr(attrs.length)}
-                        WHERE cart_id = \$${attrs.length*2+1}
+                        SET ${util.buildUpdateSetStr(attrs)}
+                        WHERE cart_id = \$${attrs.length+1}
                         RETURNING *;
                     `,
-                    [...attrs, ...Object.values(params), cart.id]
+                    [...Object.values(params), cart.id]
                 ).catch((err) => util.query_err(err, reject));
 
-                if (result) resolve(Cart.fromJson(result.rows[0]));
+                if (result) {
+                    if (result.rowCount === 0)
+                        resolve(null);
+                    else
+                        resolve(Cart.fromJson(result.rows[0]));
+                }
             }
         });
     }
@@ -99,7 +126,12 @@ export default class CartDao implements Dao<Cart> {
                     [cart.id]
                 ).catch((err) => util.query_err(err, reject));
 
-                if (result) resolve(Cart.fromJson(result.rows[0]));
+                if (result) {
+                    if (result.rowCount === 0)
+                        resolve(null);
+                    else
+                        resolve(Cart.fromJson(result.rows[0]));
+                }
             }
         });
     }

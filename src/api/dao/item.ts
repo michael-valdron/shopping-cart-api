@@ -4,7 +4,7 @@ import * as util from "./util";
 import Item from "../model/item";
 import { ItemJson } from "../schemas/item";
 
-type ItemParams = {
+export type ItemParams = {
     label?: string,
     price?: number
 }
@@ -26,7 +26,13 @@ export default class ItemDao implements Dao<Item> {
                     'SELECT * FROM items WHERE item_id=$1;',
                     [id]
                 ).catch((err) => util.query_err(err, reject));
-                if (result) resolve(Item.fromJson(result.rows[0]));
+
+                if (result) {
+                    if (result.rowCount === 0)
+                        resolve(null);
+                    else
+                        resolve(Item.fromJson(result.rows[0]));
+                }
             }
         });
     }
@@ -36,7 +42,13 @@ export default class ItemDao implements Dao<Item> {
             const client = await this._pool.connect().catch((err) => util.connect_error(err, reject));
             if (client) {
                 const result = await client.query<ItemJson>('SELECT * FROM items;').catch((err) => util.query_err(err, reject));
-                if (result) resolve(result.rows.map(Item.fromJson));
+
+                if (result) {
+                    if (result.rowCount === 0)
+                        resolve([]);
+                    else
+                        resolve(result.rows.map(Item.fromJson));
+                }
             }
         });
     }
@@ -73,14 +85,19 @@ export default class ItemDao implements Dao<Item> {
                 const result = await client.query<ItemJson>(
                     `
                         UPDATE items
-                        SET ${util.buildUpdateSetStr(attrs.length)}
-                        WHERE item_id = \$${attrs.length*2+1}
+                        SET ${util.buildUpdateSetStr(attrs)}
+                        WHERE item_id = \$${attrs.length+1}
                         RETURNING *;
                     `,
-                    [...attrs, ...Object.values(params), item.id]
+                    [...Object.values(params), item.id]
                 ).catch((err) => util.query_err(err, reject));
 
-                if (result) resolve(Item.fromJson(result.rows[0]));
+                if (result) {
+                    if (result.rowCount === 0)
+                        resolve(null);
+                    else
+                        resolve(Item.fromJson(result.rows[0]));
+                }
             }
         });
     }
@@ -99,7 +116,12 @@ export default class ItemDao implements Dao<Item> {
                     [item.id]
                 ).catch((err) => util.query_err(err, reject));
 
-                if (result) resolve(Item.fromJson(result.rows[0]));
+                if (result) {
+                    if (result.rowCount === 0)
+                        resolve(null);
+                    else
+                        resolve(Item.fromJson(result.rows[0]));
+                }
             }
         });
     }
