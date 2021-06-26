@@ -28,6 +28,7 @@
     "build": "tsc",
     "start": "node dist/",
     "watch": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
+    "repl": "ts-node",
     "test": "jest",
     "clean": "rimraf dist/*"
   }
