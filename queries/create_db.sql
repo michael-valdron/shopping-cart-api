@@ -27,4 +27,12 @@ CREATE TABLE IF NOT EXISTS items(
     CONSTRAINT fk_cart
         FOREIGN KEY(cart_id)
         REFERENCES carts(cart_id)
+        ON DELETE CASCADE
+);
+
+-- Creates tax relation to store all tax percentages.
+CREATE TABLE IF NOT EXISTS tax(
+    tax_id SERIAL PRIMARY KEY,
+    tax_label VARCHAR(3) UNIQUE NOT NULL,
+    tax_percent NUMERIC NOT NULL
 );
