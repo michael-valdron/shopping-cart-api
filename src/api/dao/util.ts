@@ -1,10 +1,6 @@
-export function buildUpdateSetStr(attrCount: number): string {
-    const ids = Array.from({length: attrCount}, (_, i) => 
-        i + 1
-    );
-
-    return ids
-        .map((idx) => `\$${idx} = \$${idx+attrCount}`)
+export function buildUpdateSetStr(attrs: string[]): string {
+    return attrs
+        .map((attr, idx) => `${attr} = \$${idx+1}`)
         .join(', ');
 }
 
