@@ -1,7 +1,7 @@
 {
   "name": "Shopping Cart API",
   "description": "RESTful APIs for performing CRUD requests on the Shopping Cart database.",
-  "repository": "https://github.com/heroku/node-js-getting-started",
+  "repository": "https://github.com/michael-valdron/shopping-cart-api",
   "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/main/public/node.svg",
   "keywords": ["node", "express", "heroku"],
   "image": "heroku/nodejs"
