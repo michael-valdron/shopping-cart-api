@@ -29,7 +29,7 @@ export default class Item {
      public toJson(): any {
         return {
             id: this._id,
-            chartId: this.cartId,
+            cartId: this.cartId,
             label: this._label,
             price: util.roundTo(this._price, 2)
         }
