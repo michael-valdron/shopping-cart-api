@@ -39,7 +39,7 @@ router.post(path.join(BASE_URI, 'cart/:id'), async (req, res) => {
             resBody = util.DB_ERROR_RESPONSE;
         }).then(async (cart) => {
             if (status !== 500 && !(cart instanceof Cart)) {
-                status = 400;
+                status = 404;
                 resBody = util.errorResponse(`No cart with id '${id}' exists for editing.`);
             } else if (cart instanceof Cart) {
                 let params = (data as CartParams);
