@@ -7,4 +7,8 @@ dotenv.config();
 
 const PORT = Number.parseInt(process.env.PORT) || 3000;
 
-createApp().listen(PORT);
+createApp().then((server) => {
+    server.listen(PORT);
+}).catch((err) => {
+    console.error(err);
+});

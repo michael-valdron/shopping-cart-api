@@ -3,7 +3,7 @@ import express from 'express'
 
 import router from './router';
 
-export default function createApp(name: string = 'shopping-chart-api'): Express {
+export default async function createApp(name: string = 'shopping-chart-api'): Promise<Express> {
     const app = express();
 
     app.set('name', name);
