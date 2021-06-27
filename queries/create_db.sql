@@ -1,4 +1,5 @@
 -- Author: Michael Valdron
+-- For local dev use
 
 -- Creates shopping cart database for storing records on
 -- carts and cart items.
