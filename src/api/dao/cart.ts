@@ -1,4 +1,4 @@
-import { Pool } from "pg";
+import { Pool, PoolConfig } from "pg";
 import Dao from ".";
 import * as util from "./util";
 import Cart from "../model/cart";
@@ -15,8 +15,14 @@ export default class CartDao implements Dao<Cart> {
     private _pool: Pool;
 
     constructor() {
+        const ssl: PoolConfig = (process.env.SSL) ? {
+            ssl: {
+                rejectUnauthorized: false
+            }
+        } : {};
         this._pool = new Pool({
-            connectionString: process.env.DATABASE_URL
+            connectionString: process.env.DATABASE_URL,
+            ...ssl
         });
     }
 

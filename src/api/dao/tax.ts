@@ -1,4 +1,4 @@
-import { Pool } from "pg";
+import { Pool, PoolConfig } from "pg";
 import Dao from ".";
 import * as util from "./util";
 import { TaxJson } from "../schemas/tax";
@@ -13,8 +13,14 @@ export default class TaxDao implements Dao<Tax> {
     private _pool: Pool;
 
     constructor() {
+        const ssl: PoolConfig = (process.env.SSL) ? {
+            ssl: {
+                rejectUnauthorized: false
+            }
+        } : {};
         this._pool = new Pool({
-            connectionString: process.env.DATABASE_URL
+            connectionString: process.env.DATABASE_URL,
+            ...ssl
         });
     }
 
