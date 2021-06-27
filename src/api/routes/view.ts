@@ -76,6 +76,27 @@ router.get(path.join(BASE_URI, 'cart/:id'), async (req, res) => {
     res.status(status).json(resBody);
 });
 
+/**
+ * '/api/view/item/id'.
+ */
+ router.get(path.join(BASE_URI, 'item/id'), async (req, res) => {
+    const itemsDao = new ItemDao();
+    let status = 200;
+    let resBody = {};
+
+    await itemsDao.readAll().catch((err) => {
+        console.error(err);
+        status = 500;
+        resBody = util.DB_ERROR_RESPONSE;
+    }).then((items) => {
+        if (Array.isArray(items)) {
+            resBody = items.map((item) => item.id);
+        }
+    });
+
+    res.status(status).json(resBody);
+});
+
 router.post(path.join(BASE_URI, '*'), invalidRequest);
 router.put(path.join(BASE_URI, '*'), invalidRequest);
 router.delete(path.join(BASE_URI, '*'), invalidRequest);
