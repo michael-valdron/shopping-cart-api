@@ -23,7 +23,7 @@ router.delete(path.join(BASE_URI, '/cart/:id'), async (req, res) => {
 
     if (!Number.isInteger(id)) {
         status = 400;
-        resBody = util.errorResponse(`Invalid item id number '${req.params.id}'.`);
+        resBody = util.errorResponse(`Invalid cart id number '${req.params.id}'.`);
     } else {
         const cartsDao = new CartDao();
         await cartsDao.read(id).catch((err) => {
