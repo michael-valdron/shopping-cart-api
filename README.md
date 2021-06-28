@@ -67,7 +67,7 @@ To run production service (in project folder) run:
 - `PUT /api/v1/add`: Creates records in database for items and parent cart from JSON repersentation of a cart shown below:
 
 **With Discount**
-```json
+```js
 {
     "discount": 0.1, // 10%
     "items": [
@@ -85,7 +85,7 @@ To run production service (in project folder) run:
 ```
 
 **Without Discount**
-```json
+```js
 {
     "items": [
         {
@@ -108,14 +108,14 @@ called `tax` which contains all tax percentages to compute against the
 `subtotal`.
 
 - `GET /api/v1/view/cart/id`: Fetches all unique identifiers of shopping carts from backend database and returns a JSON array response, example:
-```json
+```js
 [1, 2, 3, 4, 5, ...]
 ```
 
 **Note**: If cart records are not found, the above request will return an empty JSON array.
 
 - `GET /api/v1/view/cart/[id]`: Fetches a cart record by given unique identifier `id` from backend database and returns a JSON object with all data on cart record and an array of JSON object with data on all attached item records, example:
-```json
+```js
 {
     "id": 1,
     "subtotal": 6.98,
@@ -143,7 +143,7 @@ called `tax` which contains all tax percentages to compute against the
 
 - `POST /api/v1/edit/cart/[id]`: Updates a cart record by given unique identifier `id` and updated to values specified by a passed JSON object with their attributes. For updating carts only the `discount` attribute can be updated as others are prevented by constraint(s) or are calculated. Returns a JSON object with all data on cart record. Example of input data:
 
-```json
+```js
 {
     "discount": 0.2 // updates current discount to 20%
 }
@@ -190,7 +190,7 @@ When error responses happen, the following JSON object is returned:
 ```json
 {
     "status": "error",
-    "message": <error message with details>
+    "message": "<error message with details>"
 }
 ```
 
