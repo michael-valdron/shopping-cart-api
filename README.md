@@ -31,6 +31,7 @@ Here is a list of environments variables to set:
 
 - `DATABASE_URL`: A URL to the backend PostgreSQL database for use by the APIs, example format: '`postgres://[user]:[password]@[hostname]:[port]/[dbname]`'
 - `DATABASE_SSL` (Optional): If set to any value, the API service will use an SSL enabled connection to `DATABASE_URL` specified.
+- `WEB_CONCURRENCY`: Specifies an integer which indicates the number of web listeners to run at once, if not specified only one listener will run.
 - `PGPORT` (For `docker-compose` DB only): Specifies the port number to use on PostgreSQL `docker` container.
 - `PGPASSWORD` (For `docker-compose` DB and DB access only): Specifies password to use for the `postgres` user in `docker` container, also allows for passwordless access to a `psql` connection for management.
 
