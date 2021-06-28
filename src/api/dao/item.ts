@@ -4,14 +4,23 @@ import * as util from "./util";
 import Item from "../model/item";
 import { ItemJson } from "../schemas/item";
 
+/**
+ * Type of JSON object used for updating an `Item` entity in the database
+ */
 export type ItemParams = {
     label?: string,
     price?: number
 }
 
+/**
+ * Data access object class for `Item` model entity
+ */
 export default class ItemDao implements Dao<Item> {
     private _pool: Pool;
 
+    /**
+     * Create an `Item` data access object.
+     */
     constructor() {
         const ssl: PoolConfig = (process.env.SSL) ? {
             ssl: {
@@ -24,6 +33,12 @@ export default class ItemDao implements Dao<Item> {
         });
     }
 
+    /**
+     * Queries for an item with a given `id`.
+     * 
+     * @param id - Unique identifier for an item to aquire.
+     * @returns a `Item` model entity for resultant record, `null` if none found.
+     */
     read(id: number): Promise<Item> {
         return new Promise<Item>(async (resolve, reject) => {
             const client = await this._pool.connect().catch((err) => util.connect_error(err, reject));
@@ -43,6 +58,11 @@ export default class ItemDao implements Dao<Item> {
         });
     }
 
+    /**
+     * Queries for all items stored in database.
+     * 
+     * @returns A collection of `Item` model entities.
+     */
     readAll(): Promise<Item[]> {
         return new Promise<Item[]>(async (resolve, reject) => {
             const client = await this._pool.connect().catch((err) => util.connect_error(err, reject));
@@ -59,6 +79,12 @@ export default class ItemDao implements Dao<Item> {
         });
     }
 
+    /**
+     * Creates a new record in database provided by given `Item` entity.
+     * 
+     * @param item - A new `Item` entity to create in database.
+     * @returns an `Item` entity of the newly created record.
+     */
     create(item: Item): Promise<Item> {
         return new Promise<Item>(async (resolve, reject) => {
             const client = await this._pool.connect().catch((err) => util.connect_error(err, reject));
@@ -80,6 +106,14 @@ export default class ItemDao implements Dao<Item> {
         });
     }
 
+    /**
+     * Updates record attributes to values specified in `params`, record is aquired by `id` field
+     * in given `Item` entity.
+     * 
+     * @param item - `Item` entity to be updated.
+     * @param params - JSON object with specified fields to be updated with new values.
+     * @returns the updated `Item` entity, `null` if no record is found.
+     */
     update(item: Item, params: ItemParams): Promise<Item> {
         return new Promise<Item>(async (resolve, reject) => {
             const attrs: string[] = Object.keys(params)
@@ -108,6 +142,13 @@ export default class ItemDao implements Dao<Item> {
         });
     }
 
+    /**
+     * Deletes item record in database for given `Item` entity, record is aquired by `id` field
+     * in given `Item` entity.
+     * 
+     * @param item - `Item` entity to be deleted from database.
+     * @returns the deleted `Item` entity, `null` if no record is found.
+     */
     delete(item: Item): Promise<Item> {
         return new Promise<Item>(async (resolve, reject) => {
             const client = await this._pool.connect().catch((err) => util.connect_error(err, reject));

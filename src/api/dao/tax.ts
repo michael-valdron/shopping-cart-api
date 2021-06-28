@@ -4,14 +4,23 @@ import * as util from "./util";
 import { TaxJson } from "../schemas/tax";
 import Tax from "../model/tax";
 
+/**
+ * Type of JSON object used for updating a `Tax` entity in the database
+ */
 type TaxParams = {
     label?: string,
     percent?: number
 };
 
+/**
+ * Data access object class for `Tax` model entity
+ */
 export default class TaxDao implements Dao<Tax> {
     private _pool: Pool;
 
+    /**
+     * Create a `Tax` data access object.
+     */
     constructor() {
         const ssl: PoolConfig = (process.env.SSL) ? {
             ssl: {
@@ -24,6 +33,12 @@ export default class TaxDao implements Dao<Tax> {
         });
     }
 
+    /**
+     * Queries for a tax record with a given `id`.
+     * 
+     * @param id - Unique identifier for a tax record to aquire.
+     * @returns a `Tax` model entity for resultant record, `null` if none found.
+     */
     read(id: number): Promise<Tax> {
         return new Promise<Tax>(async (resolve, reject) => {
             const client = await this._pool.connect().catch((err) => util.connect_error(err, reject));
@@ -44,6 +59,11 @@ export default class TaxDao implements Dao<Tax> {
         });
     }
 
+    /**
+     * Queries for all forms of taxes stored in database.
+     * 
+     * @returns A collection of `Tax` model entities.
+     */
     readAll(): Promise<Tax[]> {
         return new Promise<Tax[]>(async (resolve, reject) => {
             const client = await this._pool.connect().catch((err) => util.connect_error(err, reject));
@@ -60,6 +80,12 @@ export default class TaxDao implements Dao<Tax> {
         });
     }
 
+    /**
+     * Creates a new record in database provided by given `Tax` entity.
+     * 
+     * @param tax - A new `Tax` entity to create in database.
+     * @returns a `Tax` entity of the newly created record.
+     */
     create(tax: Tax): Promise<Tax> {
         return new Promise<Tax>(async (resolve, reject) => {
             const client = await this._pool.connect().catch((err) => util.connect_error(err, reject));
@@ -82,6 +108,14 @@ export default class TaxDao implements Dao<Tax> {
         });
     }
 
+    /**
+     * Updates record attributes to values specified in `params`, record is aquired by `id` field
+     * in given `Tax` entity.
+     * 
+     * @param tax - `Tax` entity to be updated.
+     * @param params - JSON object with specified fields to be updated with new values.
+     * @returns the updated `Tax` entity, `null` if no record is found.
+     */
     update(tax: Tax, params: TaxParams): Promise<Tax> {
         return new Promise<Tax>(async (resolve, reject) => {
             const attrs: string[] = Object.keys(params)
@@ -110,6 +144,13 @@ export default class TaxDao implements Dao<Tax> {
         });
     }
 
+    /**
+     * Deletes tax record in database for given `Tax` entity, record is aquired by `id` field
+     * in given `Tax` entity.
+     * 
+     * @param tax - `Tax` entity to be deleted from database.
+     * @returns the deleted `Tax` entity, `null` if no record is found.
+     */
     delete(tax: Tax): Promise<Tax> {
         return new Promise<Tax>(async (resolve, reject) => {
             const client = await this._pool.connect().catch((err) => util.connect_error(err, reject));
