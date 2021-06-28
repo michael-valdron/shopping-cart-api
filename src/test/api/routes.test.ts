@@ -150,6 +150,7 @@ describe('GET /api/v1/view/cart/:id', () => {
                         expect(Object.keys(res.body).sort()).toEqual(expectedCartKeys.sort());
                         done();
                     });
+                done();
             });
     });
 });
@@ -206,6 +207,7 @@ describe('POST /api/v1/edit/cart/:id', () => {
                         expect(res.body).toMatchObject(util.errorResponse("Invalid JSON input for editing a cart."));
                         done();
                     });
+                done();
             });
     });
 
@@ -227,6 +229,7 @@ describe('POST /api/v1/edit/cart/:id', () => {
                         expect(res.body).toMatchObject(util.errorResponse(`No cart with id '${cartIds[cartIds.length-1]+1}' exists for editing.`));
                         done();
                     });
+                done();
             });
     });
 
@@ -251,6 +254,7 @@ describe('POST /api/v1/edit/cart/:id', () => {
                         expect(res.body.discount).toEqual(validInput.discount);
                         done();
                     });
+                done();
             });
     });
 });
@@ -307,6 +311,7 @@ describe('POST /api/v1/edit/item/:id', () => {
                         expect(res.body).toMatchObject(util.errorResponse("Invalid JSON input for editing an item."));
                         done();
                     });
+                done();
             });
     });
 
@@ -328,6 +333,7 @@ describe('POST /api/v1/edit/item/:id', () => {
                         expect(res.body).toMatchObject(util.errorResponse(`No item with id '${itemIds[itemIds.length-1]+1}' exists for editing.`));
                         done();
                     });
+                done();
             });
     });
 
