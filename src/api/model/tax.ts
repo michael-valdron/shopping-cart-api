@@ -3,16 +3,17 @@ import { TaxJson } from "../schemas/tax";
 /**
  * Model entity for a form of tax.
  */
-export default class Tax {
+export class Tax {
     private _id?: number;
     private _label: string;
     private _percent: number;
 
     /**
-     * Converts a JSON record result from `pg` query to a `Tax` model entity.
+     * Converts a JSON record result from `pg` query to a {@link Tax} model entity.
      * 
-     * @param json - A `Tax` JSON object from `pg` driver
-     * @returns `Tax` model entity.
+     * @param json - A {@link Tax} JSON object from `pg` driver
+     * @returns A {@link Tax} model entity.
+     * @see TaxDao
      */
     public static fromJson(json: TaxJson): Tax {
         return new Tax(
@@ -23,11 +24,11 @@ export default class Tax {
     }
 
     /**
-     * Create a `Tax` model entity.
+     * Create a {@link Tax} model entity.
      * 
      * @param label - 3-letter identifier for tax percentage.
      * @param percent - Percentage value of tax.
-     * @param id - (Optional) unique identifier of the `Tax`, required for accessing existing `Tax` in database
+     * @param id - (Optional) unique identifier of the {@link Tax}, required for accessing existing {@link Tax} in database
      */
     constructor(label: string, percent: number, id?: number) {
         this.id = id;
@@ -36,7 +37,7 @@ export default class Tax {
     }
     
     /**
-     * returns `Tax` unique identifier.
+     * returns {@link Tax} unique identifier.
      */
     public get id(): number {
         return this._id;
@@ -57,7 +58,7 @@ export default class Tax {
     }
     
     /**
-     * sets `Tax` unique identifier.
+     * sets {@link Tax} unique identifier.
      */
     public set id(v: number) {
         this._id = v;

@@ -2,11 +2,11 @@ import { Router, Request, Response } from "express";
 import path from "path";
 import * as util from "../util";
 import * as validation from "../validation";
-import CartDao, { CartParams } from "../dao/cart";
-import ItemDao, { ItemParams } from "../dao/item";
-import Cart from "../model/cart";
-import Item from "../model/item";
-import TaxDao from "../dao/tax";
+import { CartDao, CartParams } from "../dao/cart";
+import { ItemDao, ItemParams } from "../dao/item";
+import { TaxDao } from "../dao/tax";
+import { Cart } from "../model/cart";
+import { Item } from "../model/item";
 
 const BASE_URI = '/edit';
 

@@ -1,5 +1,7 @@
 /**
- * Type of JSON object recieved by `pg` driver for `Item` entities
+ * Type of JSON object recieved by `pg` driver for {@link Item} entities
+ * @see Item
+ * @see ItemDao
  */
 export type ItemJson = {
     item_id: number,

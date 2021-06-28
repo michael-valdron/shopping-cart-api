@@ -1,7 +1,7 @@
 /**
  * Interface for all data access object classes.
  */
-export default interface Dao<T> {
+export interface Dao<T> {
     /**
      * Queries for an entity `T` with a given `id`.
      * 

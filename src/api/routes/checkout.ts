@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
 import path from "path";
 import * as util from "../util"
-import CartDao from "../dao/cart";
-import Cart from "../model/cart";
-import ItemDao from "../dao/item";
+import { CartDao } from "../dao/cart";
+import { Cart } from "../model/cart";
+import { ItemDao } from "../dao/item";
 
 const BASE_URI = '/checkout';
 

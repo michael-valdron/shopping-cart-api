@@ -4,7 +4,7 @@ import * as util from "../util";
 /**
  * Model entity for a shopping cart.
  */
-export default class Cart {
+export class Cart {
     private _id?: number;
     private _subtotal: number;
     private _discount: number;
@@ -23,10 +23,11 @@ export default class Cart {
         (subtotal+tax)-((subtotal+tax)*discount);
 
     /**
-     * Converts a JSON record result from `pg` query to a `Cart` model entity.
+     * Converts a JSON record result from `pg` query to a {@link Cart} model entity.
      * 
-     * @param json - A `Cart` JSON object from `pg` driver
-     * @returns `Cart` model entity.
+     * @param json - A {@link Cart} JSON object from `pg` driver
+     * @returns A {@link Cart} model entity.
+     * @see CartDao
      */
     static fromJson = (json: CartJson): Cart =>
         new Cart(
@@ -37,14 +38,14 @@ export default class Cart {
             json.cart_id);
 
     /**
-     * Create a `Cart` model entity.
+     * Create a {@link Cart} model entity.
      * 
-     * @param subtotal - subtotal of `Cart`
-     * @param discount - discount percent to be applied subtotal of the `Cart`
-     * @param taxes - total tax amount to be applied to `Cart`
-     * @param total - (Optional) total price of the `Cart` with taxes and discount applied, if not specified will be calculated 
+     * @param subtotal - subtotal of {@link Cart}
+     * @param discount - discount percent to be applied subtotal of the {@link Cart}
+     * @param taxes - total tax amount to be applied to {@link Cart}
+     * @param total - (Optional) total price of the {@link Cart} with taxes and discount applied, if not specified will be calculated 
      * from `subtotal`, `discount` and `taxes`
-     * @param id - (Optional) unique identifier of the `Cart`, required for accessing existing `Cart` in database
+     * @param id - (Optional) unique identifier of the {@link Cart}, required for accessing existing {@link Cart} in database
      */
     constructor(subtotal: number, discount: number, taxes: number, total?: number, id?: number) {
         this._id = id;
@@ -55,9 +56,9 @@ export default class Cart {
     }
 
     /**
-     * Creates a JSON object repersentation of `Cart` entity.
+     * Creates a JSON object repersentation of {@link Cart} entity.
      * 
-     * @returns JSON object repersentation of `Cart` entity
+     * @returns JSON object repersentation of {@link Cart} entity
      */
     public toJson(): any {
         return {
@@ -70,70 +71,70 @@ export default class Cart {
     }
 
     /**
-     * returns `Cart` unique identifier.
+     * returns {@link Cart} unique identifier.
      */
     public get id(): number {
         return this._id;
     }
     
     /**
-     * returns the subtotal of the `Cart`.
+     * returns the subtotal of the {@link Cart}.
      */
     public get subtotal(): number {
         return this._subtotal;
     }
     
     /**
-     * returns the discounted percent of the `Cart`.
+     * returns the discounted percent of the {@link Cart}.
      */
     public get discount(): number {
         return this._discount;
     }
     
     /**
-     * returns the total tax amount of the `Cart`.
+     * returns the total tax amount of the {@link Cart}.
      */
     public get taxes(): number {
         return this._taxes;
     }
     
     /**
-     * returns the total price of the `Cart`.
+     * returns the total price of the {@link Cart}.
      */
     public get total(): number {
         return this._total;
     }
     
     /**
-     * sets `Cart` unique identifier.
+     * sets {@link Cart} unique identifier.
      */
     public set id(v: number) {
         this._id = v;
     }
     
     /**
-     * sets the subtotal of the `Cart`.
+     * sets the subtotal of the {@link Cart}.
      */
     public set subtotal(v: number) {
         this._subtotal = v;
     }
 
     /**
-     * sets the discounted percent of the `Cart`.
+     * sets the discounted percent of the {@link Cart}.
      */
     public set discount(v: number) {
         this._discount = v;
     }
     
     /**
-     * sets the total tax amount of the `Cart`.
+     * sets the total tax amount of the {@link Cart}.
      */
     public set taxes(v: number) {
         this._taxes = v;
     }
 
     /**
-     * sets the total price of the `Cart`.
+     * sets the total price of the {@link Cart}.
      */
     public set total(v: number) {
         this._total = v;

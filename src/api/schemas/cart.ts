@@ -1,5 +1,7 @@
 /**
- * Type of JSON object recieved by `pg` driver for `Cart` entities
+ * Type of JSON object recieved by `pg` driver for {@link Cart} entities
+ * @see Cart
+ * @see CartDao
  */
 export type CartJson = {
     cart_id: number,

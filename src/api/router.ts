@@ -10,7 +10,7 @@ import * as util from "./util"
 const BASE_URI = '/api/v1';
 
 /**
- * Main '/api' router.
+ * Main '/api/v1' router.
  */
 const router = Router();
 
