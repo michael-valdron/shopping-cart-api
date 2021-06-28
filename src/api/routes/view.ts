@@ -6,6 +6,10 @@ import ItemDao from "../dao/item";
 import Cart from "../model/cart";
 
 const BASE_URI = '/view';
+
+/**
+ * Router for Create ('/api/view') APIs.
+ */
 const router = Router();
 
 const invalidRequest = (req: Request, res: Response) => 
