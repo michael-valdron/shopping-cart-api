@@ -1,5 +1,8 @@
 import { TaxJson } from "../schemas/tax";
 
+/**
+ * Model entity for a form of tax.
+ */
 export default class Tax {
     private _id?: number;
     private _label: string;

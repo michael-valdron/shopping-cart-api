@@ -1,6 +1,9 @@
 import { ItemJson } from "../schemas/item";
 import * as util from "../util";
 
+/**
+ * Model entity for a shopping cart item.
+ */
 export default class Item {
     private _id?: number;
     private _cartId: number;

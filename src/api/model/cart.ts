@@ -1,6 +1,9 @@
 import { CartJson } from "../schemas/cart";
 import * as util from "../util";
 
+/**
+ * Model entity for a shopping cart.
+ */
 export default class Cart {
     private _id?: number;
     private _subtotal: number;
