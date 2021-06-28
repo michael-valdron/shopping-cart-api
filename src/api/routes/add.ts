@@ -11,13 +11,13 @@ import Item from "../model/item";
 const BASE_URI = '/add';
 
 /**
- * Router for Create ('/api/add') APIs.
+ * Router for Create ('/api/v1/add') APIs.
  */
 const router = Router();
 
 const invalidRequest = (req: Request, res: Response) => 
     res.status(400)
-        .json(util.errorResponse(`Invalid Request: All '/api/add' routes should be PUT, got ${req.method} instead.`));
+        .json(util.errorResponse(`Invalid Request: All '/api/v1/add' routes should be PUT, got ${req.method} instead.`));
 
 /**
  * Creates a new cart.

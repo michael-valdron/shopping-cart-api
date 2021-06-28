@@ -8,13 +8,13 @@ import ItemDao from "../dao/item";
 const BASE_URI = '/checkout';
 
 /**
- * Router for Delete ('/api/checkout') APIs.
+ * Router for Delete ('/api/v1/checkout') APIs.
  */
 const router = Router();
 
 const invalidRequest = (req: Request, res: Response) => 
     res.status(400)
-        .json(util.errorResponse(`Invalid Request: All '/api/checkout' routes should be DELETE, got ${req.method} instead.`));
+        .json(util.errorResponse(`Invalid Request: All '/api/v1/checkout' routes should be DELETE, got ${req.method} instead.`));
 
 router.delete(path.join(BASE_URI, '/cart/:id'), async (req, res) => {
     const id = Number.parseFloat(req.params.id);

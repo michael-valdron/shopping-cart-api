@@ -11,13 +11,13 @@ import TaxDao from "../dao/tax";
 const BASE_URI = '/edit';
 
 /**
- * Router for Update ('/api/edit') APIs.
+ * Router for Update ('/api/v1/edit') APIs.
  */
 const router = Router();
 
 const invalidRequest = (req: Request, res: Response) => 
     res.status(400)
-        .json(util.errorResponse(`Invalid Request: All '/api/edit' routes should be POST, got ${req.method} instead.`));
+        .json(util.errorResponse(`Invalid Request: All '/api/v1/edit' routes should be POST, got ${req.method} instead.`));
 
 router.post(path.join(BASE_URI, 'cart/:id'), async (req, res) => {
     const id = Number.parseFloat(req.params.id);

@@ -8,13 +8,13 @@ import Cart from "../model/cart";
 const BASE_URI = '/view';
 
 /**
- * Router for Create ('/api/view') APIs.
+ * Router for Create ('/api/v1/view') APIs.
  */
 const router = Router();
 
 const invalidRequest = (req: Request, res: Response) => 
     res.status(400)
-        .json(util.errorResponse(`Invalid Request: All '/api/view' routes should be GET, got ${req.method} instead.`));
+        .json(util.errorResponse(`Invalid Request: All '/api/v1/view' routes should be GET, got ${req.method} instead.`));
 
 /**
  * '/api/view/cart/id'.

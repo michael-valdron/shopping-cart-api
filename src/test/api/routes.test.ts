@@ -13,9 +13,9 @@ beforeAll(async () => {
     server = await createApp();
 });
 
-describe('PUT /api/add', () => {
+describe('PUT /api/v1/add', () => {
     it('should return status code 400 and a JSON error response for no data passed', (done) => {
-        request(server).put('/api/add')
+        request(server).put('/api/v1/add')
             .expect('Content-Type', /json/)
             .expect(400)
             .end((err, res) => {
@@ -38,7 +38,7 @@ describe('PUT /api/add', () => {
             ]
         };
 
-        request(server).put('/api/add')
+        request(server).put('/api/v1/add')
             .send(input)
             .expect('Content-Type', /json/)
             .expect(400)
@@ -65,7 +65,7 @@ describe('PUT /api/add', () => {
         };
         const expectedCartKeys = ['id', 'subtotal', 'discount', 'taxes', 'total', 'items'];
 
-        request(server).put('/api/add')
+        request(server).put('/api/v1/add')
             .send(input)
             .expect('Content-Type', /json/)
             .expect(200)
@@ -78,9 +78,9 @@ describe('PUT /api/add', () => {
     });
 });
 
-describe('GET /api/view/cart/id', () => {
+describe('GET /api/v1/view/cart/id', () => {
     it('should return status code 200 and a JSON response of cart ids', (done) => {
-        request(server).get('/api/view/cart/id')
+        request(server).get('/api/v1/view/cart/id')
             .expect('Content-Type', /json/)
             .expect(200)
             .end((err, res) => {
@@ -92,9 +92,9 @@ describe('GET /api/view/cart/id', () => {
     });
 });
 
-describe('GET /api/view/item/id', () => {
+describe('GET /api/v1/view/item/id', () => {
     it('should return status code 200 and a JSON response of item ids', (done) => {
-        request(server).get('/api/view/item/id')
+        request(server).get('/api/v1/view/item/id')
             .expect('Content-Type', /json/)
             .expect(200)
             .end((err, res) => {
@@ -106,9 +106,9 @@ describe('GET /api/view/item/id', () => {
     });
 });
 
-describe('GET /api/view/cart/:id', () => {
+describe('GET /api/v1/view/cart/:id', () => {
     it('should return status code 400 and a JSON error response for invalid id', (done) => {
-        request(server).get('/api/view/cart/a')
+        request(server).get('/api/v1/view/cart/a')
             .expect('Content-Type', /json/)
             .expect(400)
             .end((err, res) => {
@@ -120,7 +120,7 @@ describe('GET /api/view/cart/:id', () => {
     });
 
     it('should return status code 400 and a JSON error response for invalid id', (done) => {
-        request(server).get('/api/view/cart/1.2')
+        request(server).get('/api/v1/view/cart/1.2')
             .expect('Content-Type', /json/)
             .expect(400)
             .end((err, res) => {
@@ -134,14 +134,14 @@ describe('GET /api/view/cart/:id', () => {
     it('should return status code 200 and a JSON response of cart object with items', (done) => {
         const expectedCartKeys = ['id', 'subtotal', 'discount', 'taxes', 'total', 'items'];
 
-        request(server).get('/api/view/cart/id')
+        request(server).get('/api/v1/view/cart/id')
             .expect('Content-Type', /json/)
             .expect(200)
             .end((err, res) => {
                 if (err)
                     return done(err);
                 const cartIds = (res.body as number[]);
-                request(server).get(`/api/view/cart/${cartIds[cartIds.length-1]}`)
+                request(server).get(`/api/v1/view/cart/${cartIds[cartIds.length-1]}`)
                     .expect('Content-Type', /json/)
                     .expect(200)
                     .end((err, res) => {
@@ -154,7 +154,7 @@ describe('GET /api/view/cart/:id', () => {
     });
 });
 
-describe('POST /api/edit/cart/:id', () => { 
+describe('POST /api/v1/edit/cart/:id', () => { 
     const validInput = {
         discount: 0.20
     };
@@ -163,7 +163,7 @@ describe('POST /api/edit/cart/:id', () => {
     };
 
     it('should return status code 400 and a JSON error response for invalid id', (done) => {
-        request(server).post('/api/edit/cart/a')
+        request(server).post('/api/v1/edit/cart/a')
             .send(validInput)
             .expect('Content-Type', /json/)
             .expect(400)
@@ -176,7 +176,7 @@ describe('POST /api/edit/cart/:id', () => {
     });
 
     it('should return status code 400 and a JSON error response for invalid id', (done) => {
-        request(server).post('/api/edit/cart/1.2')
+        request(server).post('/api/v1/edit/cart/1.2')
             .send(validInput)
             .expect('Content-Type', /json/)
             .expect(400)
@@ -189,14 +189,14 @@ describe('POST /api/edit/cart/:id', () => {
     });
 
     it('should return status code 400 and a JSON error response for invalid input data', (done) => {
-        request(server).get('/api/view/cart/id')
+        request(server).get('/api/v1/view/cart/id')
             .expect('Content-Type', /json/)
             .expect(200)
             .end((err, res) => {
                 if (err)
                     return done(err);
                 const cartIds = (res.body as number[]);
-                request(server).post(`/api/edit/cart/${cartIds[cartIds.length-1]}`)
+                request(server).post(`/api/v1/edit/cart/${cartIds[cartIds.length-1]}`)
                     .send(invalidInput)
                     .expect('Content-Type', /json/)
                     .expect(400)
@@ -210,14 +210,14 @@ describe('POST /api/edit/cart/:id', () => {
     });
 
     it('should return status code 404 and a JSON error response for no cart found for given id', (done) => {
-        request(server).get('/api/view/cart/id')
+        request(server).get('/api/v1/view/cart/id')
             .expect('Content-Type', /json/)
             .expect(200)
             .end((err, res) => {
                 if (err)
                     return done(err);
                 const cartIds = (res.body as number[]);
-                request(server).post(`/api/edit/cart/${cartIds[cartIds.length-1]+1}`)
+                request(server).post(`/api/v1/edit/cart/${cartIds[cartIds.length-1]+1}`)
                     .send(validInput)
                     .expect('Content-Type', /json/)
                     .expect(404)
@@ -233,14 +233,14 @@ describe('POST /api/edit/cart/:id', () => {
     it('should return status code 200 and a JSON response of edited cart', (done) => {
         const expectedCartKeys = ['id', 'subtotal', 'discount', 'taxes', 'total'];
 
-        request(server).get('/api/view/cart/id')
+        request(server).get('/api/v1/view/cart/id')
             .expect('Content-Type', /json/)
             .expect(200)
             .end((err, res) => {
                 if (err)
                     return done(err);
                 const cartIds = (res.body as number[]);
-                request(server).post(`/api/edit/cart/${cartIds[cartIds.length-1]}`)
+                request(server).post(`/api/v1/edit/cart/${cartIds[cartIds.length-1]}`)
                     .send(validInput)
                     .expect('Content-Type', /json/)
                     .expect(200)
@@ -255,7 +255,7 @@ describe('POST /api/edit/cart/:id', () => {
     });
 });
 
-describe('POST /api/edit/item/:id', () => { 
+describe('POST /api/v1/edit/item/:id', () => { 
     const validInput = {
         price: 5.99
     };
@@ -264,7 +264,7 @@ describe('POST /api/edit/item/:id', () => {
     };
 
     it('should return status code 400 and a JSON error response for invalid id', (done) => {
-        request(server).post('/api/edit/item/a')
+        request(server).post('/api/v1/edit/item/a')
             .send(validInput)
             .expect('Content-Type', /json/)
             .expect(400)
@@ -277,7 +277,7 @@ describe('POST /api/edit/item/:id', () => {
     });
 
     it('should return status code 400 and a JSON error response for invalid id', (done) => {
-        request(server).post('/api/edit/item/1.2')
+        request(server).post('/api/v1/edit/item/1.2')
             .send(validInput)
             .expect('Content-Type', /json/)
             .expect(400)
@@ -290,14 +290,14 @@ describe('POST /api/edit/item/:id', () => {
     });
 
     it('should return status code 400 and a JSON error response for invalid input data', (done) => {
-        request(server).get('/api/view/item/id')
+        request(server).get('/api/v1/view/item/id')
             .expect('Content-Type', /json/)
             .expect(200)
             .end((err, res) => {
                 if (err)
                     return done(err);
                 const itemIds = (res.body as number[]);
-                request(server).post(`/api/edit/item/${itemIds[itemIds.length-1]}`)
+                request(server).post(`/api/v1/edit/item/${itemIds[itemIds.length-1]}`)
                     .send(invalidInput)
                     .expect('Content-Type', /json/)
                     .expect(400)
@@ -311,14 +311,14 @@ describe('POST /api/edit/item/:id', () => {
     });
 
     it('should return status code 404 and a JSON error response for no item found for given id', (done) => {
-        request(server).get('/api/view/item/id')
+        request(server).get('/api/v1/view/item/id')
             .expect('Content-Type', /json/)
             .expect(200)
             .end((err, res) => {
                 if (err)
                     return done(err);
                 const itemIds = (res.body as number[]);
-                request(server).post(`/api/edit/item/${itemIds[itemIds.length-1]+1}`)
+                request(server).post(`/api/v1/edit/item/${itemIds[itemIds.length-1]+1}`)
                     .send(validInput)
                     .expect('Content-Type', /json/)
                     .expect(404)
@@ -334,14 +334,14 @@ describe('POST /api/edit/item/:id', () => {
     it('should return status code 200 and a JSON response of edited item', (done) => {
         const expectedItemKeys = ['id', 'cartId', 'label', 'price'];
 
-        request(server).get('/api/view/item/id')
+        request(server).get('/api/v1/view/item/id')
             .expect('Content-Type', /json/)
             .expect(200)
             .end((err, res) => {
                 if (err)
                     return done(err);
                 const itemIds = (res.body as number[]);
-                request(server).post(`/api/edit/item/${itemIds[itemIds.length-1]}`)
+                request(server).post(`/api/v1/edit/item/${itemIds[itemIds.length-1]}`)
                     .send(validInput)
                     .expect('Content-Type', /json/)
                     .expect(200)
@@ -356,9 +356,9 @@ describe('POST /api/edit/item/:id', () => {
     });
 });
 
-describe('DELETE /api/checkout/cart/:id', () => {
+describe('DELETE /api/v1/checkout/cart/:id', () => {
     it('should return status code 400 and a JSON error response for invalid id', (done) => {
-        request(server).delete('/api/checkout/cart/a')
+        request(server).delete('/api/v1/checkout/cart/a')
             .expect('Content-Type', /json/)
             .expect(400)
             .end((err, res) => {
@@ -370,7 +370,7 @@ describe('DELETE /api/checkout/cart/:id', () => {
     });
 
     it('should return status code 400 and a JSON error response for invalid id', (done) => {
-        request(server).delete('/api/checkout/cart/1.2')
+        request(server).delete('/api/v1/checkout/cart/1.2')
             .expect('Content-Type', /json/)
             .expect(400)
             .end((err, res) => {
@@ -382,14 +382,14 @@ describe('DELETE /api/checkout/cart/:id', () => {
     });
 
     it('should return status code 404 and a JSON error response for no cart found for given id', (done) => {
-        request(server).get('/api/view/cart/id')
+        request(server).get('/api/v1/view/cart/id')
             .expect('Content-Type', /json/)
             .expect(200)
             .end((err, res) => {
                 if (err)
                     return done(err);
                 const cartIds = (res.body as number[]);
-                request(server).delete(`/api/checkout/cart/${cartIds[cartIds.length-1]+1}`)
+                request(server).delete(`/api/v1/checkout/cart/${cartIds[cartIds.length-1]+1}`)
                     .expect('Content-Type', /json/)
                     .expect(404)
                     .end((err, res) => {
@@ -404,14 +404,14 @@ describe('DELETE /api/checkout/cart/:id', () => {
     it('should return status code 200 and a JSON response of deleted cart object with items', (done) => {
         const expectedCartKeys = ['id', 'subtotal', 'discount', 'taxes', 'total', 'items'];
 
-        request(server).get('/api/view/cart/id')
+        request(server).get('/api/v1/view/cart/id')
             .expect('Content-Type', /json/)
             .expect(200)
             .end((err, res) => {
                 if (err)
                     return done(err);
                 const cartIds = (res.body as number[]);
-                request(server).delete(`/api/checkout/cart/${cartIds[cartIds.length-1]}`)
+                request(server).delete(`/api/v1/checkout/cart/${cartIds[cartIds.length-1]}`)
                     .expect('Content-Type', /json/)
                     .expect(200)
                     .end((err, res) => {

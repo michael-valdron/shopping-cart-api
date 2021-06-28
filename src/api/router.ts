@@ -6,7 +6,7 @@ import add from "./routes/add"
 import edit from "./routes/edit"
 import checkout from "./routes/checkout"
 
-const BASE_URI = '/api';
+const BASE_URI = '/api/v1';
 
 /**
  * Main '/api' router.
