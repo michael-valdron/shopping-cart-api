@@ -5,6 +5,7 @@ import view from "./routes/view"
 import add from "./routes/add"
 import edit from "./routes/edit"
 import checkout from "./routes/checkout"
+import * as util from "./util"
 
 const BASE_URI = '/api/v1';
 
@@ -20,7 +21,7 @@ const router = Router();
  * @param res - `Response`
  */
 function notFound(req: Request, res: Response) {
-    res.status(404).json({'error': 'api not found'});
+    res.status(404).json(util.errorResponse("api not found"));
 }
 
 router.get(path.join(BASE_URI, 'ping'), (req, res) => {
