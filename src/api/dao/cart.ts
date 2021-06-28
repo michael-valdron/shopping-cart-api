@@ -26,7 +26,7 @@ export class CartDao implements Dao<Cart> {
      * Create a {@link Cart} data access object.
      */
     constructor() {
-        const ssl: PoolConfig = (process.env.SSL) ? {
+        const ssl: PoolConfig = (process.env.DATABASE_SSL) ? {
             ssl: {
                 rejectUnauthorized: false
             }
@@ -40,7 +40,7 @@ export class CartDao implements Dao<Cart> {
     /**
      * Queries for a cart with a given `id`.
      * 
-     * @param id - Unique identifier for a cart to aquire.
+     * @param id - Unique identifier for a cart to acquire.
      * @returns a {@link Cart} model entity for resultant record, `null` if none found.
      */
     read(id: number): Promise<Cart> {
@@ -119,7 +119,7 @@ export class CartDao implements Dao<Cart> {
     }
 
     /**
-     * Updates record attributes to values specified in `params`, record is aquired by `id` field
+     * Updates record attributes to values specified in `params`, record is acquired by `id` field
      * in given {@link Cart} entity.
      * 
      * @param cart - {@link Cart} entity to be updated.
@@ -155,7 +155,7 @@ export class CartDao implements Dao<Cart> {
     }
 
     /**
-     * Deletes cart record in database for given {@link Cart} entity, record is aquired by `id` field
+     * Deletes cart record in database for given {@link Cart} entity, record is acquired by `id` field
      * in given {@link Cart} entity.
      * 
      * @param cart - {@link Cart} entity to be deleted from database.

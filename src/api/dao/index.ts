@@ -5,7 +5,7 @@ export interface Dao<T> {
     /**
      * Queries for an entity `T` with a given `id`.
      * 
-     * @param id - Unique identifier for a record to aquire.
+     * @param id - Unique identifier for a record to acquire.
      */
     read(id: number): Promise<T>;
 

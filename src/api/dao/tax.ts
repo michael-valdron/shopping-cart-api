@@ -24,7 +24,7 @@ export class TaxDao implements Dao<Tax> {
      * Create a {@link Tax} data access object.
      */
     constructor() {
-        const ssl: PoolConfig = (process.env.SSL) ? {
+        const ssl: PoolConfig = (process.env.DATABASE_SSL) ? {
             ssl: {
                 rejectUnauthorized: false
             }
@@ -38,7 +38,7 @@ export class TaxDao implements Dao<Tax> {
     /**
      * Queries for a tax record with a given `id`.
      * 
-     * @param id - Unique identifier for a tax record to aquire.
+     * @param id - Unique identifier for a tax record to acquire.
      * @returns a {@link Tax} model entity for resultant record, `null` if none found.
      */
     read(id: number): Promise<Tax> {
@@ -111,7 +111,7 @@ export class TaxDao implements Dao<Tax> {
     }
 
     /**
-     * Updates record attributes to values specified in `params`, record is aquired by `id` field
+     * Updates record attributes to values specified in `params`, record is acquired by `id` field
      * in given {@link Tax} entity.
      * 
      * @param tax - {@link Tax} entity to be updated.
@@ -147,7 +147,7 @@ export class TaxDao implements Dao<Tax> {
     }
 
     /**
-     * Deletes tax record in database for given {@link Tax} entity, record is aquired by `id` field
+     * Deletes tax record in database for given {@link Tax} entity, record is acquired by `id` field
      * in given {@link Tax} entity.
      * 
      * @param tax - {@link Tax} entity to be deleted from database.

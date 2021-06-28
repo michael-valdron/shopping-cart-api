@@ -24,7 +24,7 @@ export class ItemDao implements Dao<Item> {
      * Create an {@link Item} data access object.
      */
     constructor() {
-        const ssl: PoolConfig = (process.env.SSL) ? {
+        const ssl: PoolConfig = (process.env.DATABASE_SSL) ? {
             ssl: {
                 rejectUnauthorized: false
             }
