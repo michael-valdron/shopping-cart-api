@@ -3,6 +3,12 @@ import express from 'express'
 
 import router from './router';
 
+/**
+ * Factory function for creating instances of the `Express` application. 
+ * 
+ * @param name - name of `Express` application instance.
+ * @returns an instance of the `Express` application object.
+ */
 export default async function createApp(name: string = 'shopping-chart-api'): Promise<Express> {
     const app = express();
 
