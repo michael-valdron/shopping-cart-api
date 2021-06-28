@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "author": "Michael Valdron",
+  "license": "MIT",
   "engines": {
     "node": "12.22.1"
   },
