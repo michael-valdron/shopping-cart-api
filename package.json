@@ -20,6 +20,7 @@
     "@types/node": "^15.12.4",
     "@types/pg": "^8.6.0",
     "@types/supertest": "^2.0.11",
+    "@types/throng": "^5.0.0",
     "jest": "^27.0.5",
     "nodemon": "^2.0.7",
     "rimraf": "^3.0.2",
