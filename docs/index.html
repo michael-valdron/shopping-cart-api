@@ -1,0 +1,356 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Shopping Cart API - v1.0.0</title>
+	<meta name="description" content="Documentation for Shopping Cart API - v1.0.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">Shopping Cart API - v1.0.0</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>Shopping Cart API - v1.0.0</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#shopping-cart-api" id="shopping-cart-api" style="color: inherit; text-decoration: none;">
+					<h1>Shopping Cart API</h1>
+				</a>
+				<p>RESTful APIs demo for performing CRUD requests on a Shopping Cart database.</p>
+				<a href="#dependencies" id="dependencies" style="color: inherit; text-decoration: none;">
+					<h2>Dependencies</h2>
+				</a>
+				<p>The following includes all base dependencies for running the API
+				backend:</p>
+				<ul>
+					<li>NodeJS <code>12.22.1</code></li>
+					<li>Yarn <code>1.22</code>+</li>
+					<li>PostgeSQL Database (<code>12</code>+ recommended)</li>
+				</ul>
+				<p>Optionally for using a PostgreSQL container in development:</p>
+				<ul>
+					<li><code>docker</code></li>
+					<li><code>docker-compose</code></li>
+				</ul>
+				<p>All project dependencies can be fetch by <code>yarn install</code> or <code>npm install</code>. Project dependencies are specified and listed under <code>package.json</code>.</p>
+				<a href="#configuration" id="configuration" style="color: inherit; text-decoration: none;">
+					<h2>Configuration</h2>
+				</a>
+				<p>Some configuration is needed to be set by environment variables.</p>
+				<a href="#environment-variables" id="environment-variables" style="color: inherit; text-decoration: none;">
+					<h3>Environment Variables</h3>
+				</a>
+				<p>Here is a list of environments variables to set:</p>
+				<ul>
+					<li><code>DATABASE_URL</code>: A URL to the backend PostgreSQL database for use by the APIs, example format: &#39;<code>postgres://[user]:[password]@[hostname]:[port]/[dbname]</code>&#39;</li>
+					<li><code>SSL</code> (Optional): If set to any value, the API service will use an SSL enabled connection to <code>DATABASE_URL</code> specified.</li>
+					<li><code>PGPORT</code> (For <code>docker-compose</code> DB only): Specifies the port number to use on PostgreSQL <code>docker</code> container.</li>
+					<li><code>PGPASSWORD</code> (For <code>docker-compose</code> DB and DB access only): Specifies password to use for the <code>postgres</code> user in <code>docker</code> container, also allows for passwordless access to a <code>psql</code> connection for management.</li>
+				</ul>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<a href="#yarn-commands" id="yarn-commands" style="color: inherit; text-decoration: none;">
+					<h3>Yarn Commands</h3>
+				</a>
+				<p>Ensure there is a target PostgreSQL database running with the <code>DATABASE_URL</code> environment variable set to its url <strong>before</strong> running API service, <em>even in development</em>.</p>
+				<p>To run service in development mode (watching for file changes) run the following:</p>
+				<pre><code class="language-bash"><span style="color: #000000">    yarn watch</span>
+</code></pre>
+				<p>To build production JavaScript for NodeJS deployment run the following:</p>
+				<pre><code class="language-bash"><span style="color: #000000">    yarn build</span>
+</code></pre>
+				<p>To clean built production source run:</p>
+				<pre><code class="language-bash"><span style="color: #000000">    yarn clean</span>
+</code></pre>
+				<p>To run production service (in project folder) run:</p>
+				<pre><code class="language-bash"><span style="color: #000000">    yarn start</span>
+</code></pre>
+				<p><strong>Note</strong>: <code>yarn build</code> must be ran before <code>yarn start</code>.</p>
+				<a href="#api-requests" id="api-requests" style="color: inherit; text-decoration: none;">
+					<h3>API Requests</h3>
+				</a>
+				<ul>
+					<li><code>PUT /api/v1/add</code>: Creates records in database for items and parent cart from JSON repersentation of a cart shown below:</li>
+				</ul>
+				<p><strong>With Discount</strong></p>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;discount&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0.1</span><span style="color: #000000">, </span><span style="color: #008000">// 10%</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;items&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;label&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Milk&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">2.99</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;label&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Cereal&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">3.99</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        </span><span style="color: #CD3131">...</span>
+<span style="color: #000000">    ]</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p><strong>Without Discount</strong></p>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;items&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;label&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Milk&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">2.99</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;label&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Cereal&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">3.99</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        </span><span style="color: #CD3131">...</span>
+<span style="color: #000000">    ]</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p><strong>Note</strong>: When carts and items are created, unique identifiers are
+					generated within PostgeSQL. <code>subtotal</code> and <code>total</code> are calculated off
+					of each item <code>price</code>, the total tax amount (<code>taxes</code>), and the discount
+					percentage (<code>discount</code>). <code>taxes</code> is calculated from another relational
+					called <code>tax</code> which contains all tax percentages to compute against the
+				<code>subtotal</code>.</p>
+				<ul>
+					<li><code>GET /api/v1/view/cart/id</code>: Fetches all unique identifiers of shopping carts from backend database and returns a JSON array response, example:<pre><code class="language-json"><span style="color: #000000">[</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #098658">4</span><span style="color: #000000">, </span><span style="color: #098658">5</span><span style="color: #000000">, </span><span style="color: #CD3131">...</span><span style="color: #000000">]</span>
+</code></pre>
+					</li>
+				</ul>
+				<p><strong>Note</strong>: If cart records are not found, the above request will return an empty JSON array.</p>
+				<ul>
+					<li><code>GET /api/v1/view/cart/[id]</code>: Fetches a cart record by given unique identifier <code>id</code> from backend database and returns a JSON object with all data on cart record and an array of JSON object with data on all attached item records, example:<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">  </span><span style="color: #0451A5">&quot;id&quot;</span><span style="color: #000000">: </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #0451A5">&quot;subtotal&quot;</span><span style="color: #000000">: </span><span style="color: #098658">6.98</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #0451A5">&quot;discount&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #0451A5">&quot;taxes&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0.91</span><span style="color: #000000">, </span><span style="color: #008000">// Computed off of Canadian HST tax</span>
+<span style="color: #000000">  </span><span style="color: #0451A5">&quot;total&quot;</span><span style="color: #000000">: </span><span style="color: #098658">7.89</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #0451A5">&quot;items&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">      {</span>
+<span style="color: #000000">          </span><span style="color: #0451A5">&quot;label&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Milk&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">          </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">2.99</span>
+<span style="color: #000000">      },</span>
+<span style="color: #000000">      {</span>
+<span style="color: #000000">          </span><span style="color: #0451A5">&quot;label&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Cereal&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">          </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">3.99</span>
+<span style="color: #000000">      }</span>
+<span style="color: #000000">  ]</span>
+<span style="color: #000000">}</span>
+</code></pre>
+					</li>
+				</ul>
+				<p><strong>Note</strong>: If the cart record is not found, the above request will return an empty JSON object.</p>
+				<ul>
+					<li><code>GET /api/v1/view/item/id</code>: Fetches all unique identifiers of shopping cart items from backend database and returns a JSON array response.</li>
+				</ul>
+				<p><strong>Note</strong>: If item records are not found, the above request will return an empty JSON array.</p>
+				<ul>
+					<li><code>POST /api/v1/edit/cart/[id]</code>: Updates a cart record by given unique identifier <code>id</code> and updated to values specified by a passed JSON object with their attributes. For updating carts only the <code>discount</code> attribute can be updated as others are prevented by constraint(s) or are calculated. Returns a JSON object with all data on cart record. Example of input data:</li>
+				</ul>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;discount&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0.2</span><span style="color: #000000"> </span><span style="color: #008000">// updates current discount to 20%</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p><strong>Note</strong>: If the cart record is not found, the above request will return a
+				404 error with a JSON object with details.</p>
+				<ul>
+					<li><code>POST /api/v1/edit/item/[id]</code>: Updates an item record by given unique identifier <code>id</code> and updated to values specified by a passed JSON object with their attributes. For updating items only the <code>label</code> and <code>price</code> attribute can be updated. Updating the <code>price</code> will also update the <code>subtotal</code>, <code>taxes</code>, and <code>total</code> attributes in the attached cart record. Returns a JSON object with all data on item record. Examples of input data:</li>
+				</ul>
+				<p><strong>Updating Label</strong></p>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;label&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Apple&quot;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p><strong>Updating Price</strong></p>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">4.99</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p><strong>Updating Both</strong></p>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;label&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Apple&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">4.99</span><span style="color: #000000"> </span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p><strong>Note</strong>: If the item record is not found, the above request will return a
+				404 error with a JSON object with details.</p>
+				<ul>
+					<li><code>DELETE /api/v1/checkout/cart/[id]</code>: Deletes a cart record and all associated item records for a given cart <code>id</code>. Returns a JSON object with all data on cart record and an array of JSON object with data on all attached item records.</li>
+				</ul>
+				<p><strong>Note</strong>: If the cart record is not found, the above request will return a
+				404 error with a JSON object with details.</p>
+				<a href="#general-api-errors" id="general-api-errors" style="color: inherit; text-decoration: none;">
+					<h4>General API Errors</h4>
+				</a>
+				<p>When error responses happen, the following JSON object is returned:</p>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;status&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;error&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;message&quot;</span><span style="color: #000000">: </span><span style="color: #CD3131">&lt;error</span><span style="color: #000000"> </span><span style="color: #CD3131">message</span><span style="color: #000000"> </span><span style="color: #CD3131">with</span><span style="color: #000000"> </span><span style="color: #CD3131">details&gt;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<ul>
+					<li><p><strong>404 Not Found</strong>: This happens when either an API URL does not exist or in some cases (mentioned above) there are no records that match a given <code>id</code>.</p>
+					</li>
+					<li><p><strong>400 Bad Request</strong>: This either means that some input data passed was invalid or the request method is incorrect for a specific URI section. Examples:</p>
+						<ul>
+							<li><code>GET /api/v1/view/cart/a</code></li>
+							<li><code>DELETE /api/v1/add</code></li>
+							<li><code>POST /api/v1/edit/cart/1</code> with passed <code>{ &quot;foo&quot;: bar }</code></li>
+						</ul>
+					</li>
+					<li><p><strong>500 Internal Server</strong>: This happens when something is wrong with database connectivity or query execution. When this happens, ensure that the target instance of PostgreSQL is running, <code>DATABASE_URL</code> environment variable is set to the target correctly, and all barriers to make the connect are down (i.e. firewalls, open ports). It is also worth checking the server console for details when this happens. If you are a user, contact the server administrator to report this issue.</p>
+					</li>
+				</ul>
+				<a href="#how-to-test-the-software" id="how-to-test-the-software" style="color: inherit; text-decoration: none;">
+					<h2>How to test the software</h2>
+				</a>
+				<p>As with running the service, ensure there is a target PostgreSQL database running with the <code>DATABASE_URL</code> environment variable set to its url <strong>before</strong> running the tests.</p>
+				<p>Unit tests can be ran using the following:</p>
+				<pre><code><span style="color: #000000">    </span><span style="color: #001080">yarn</span><span style="color: #000000"> </span><span style="color: #001080">test</span>
+</code></pre>
+				<a href="#mit-licence" id="mit-licence" style="color: inherit; text-decoration: none;">
+					<h2>MIT Licence</h2>
+				</a>
+				<p>See <a href="LICENSE">LICENSE</a> licence details.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/dao.html">dao</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/dao_cart.html">dao/cart</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/dao_item.html">dao/item</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/dao_tax.html">dao/tax</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/dao_util.html">dao/util</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/index.html">index</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/model_cart.html">model/cart</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/model_item.html">model/item</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/model_tax.html">model/tax</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/router.html">router</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/routes_add.html">routes/add</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/routes_checkout.html">routes/checkout</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/routes_edit.html">routes/edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/routes_view.html">routes/view</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/schemas_cart.html">schemas/cart</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/schemas_item.html">schemas/item</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/schemas_tax.html">schemas/tax</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/util.html">util</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/validation.html">validation</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
