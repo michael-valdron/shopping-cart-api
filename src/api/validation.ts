@@ -1,4 +1,10 @@
 
+/**
+ * Validates if a numeric value is a valid percent.
+ * 
+ * @param p - percent to validate
+ * @returns `true` if `p` is a valid percent, `false` if not.
+ */
 const validatePercent = (p: any): boolean => typeof p === 'number' && p >= 0 && p <= 1;
 
 /**
