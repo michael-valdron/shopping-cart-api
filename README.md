@@ -2,6 +2,10 @@
 
 RESTful APIs demo for performing CRUD requests on a Shopping Cart database.
 
+Live preview of this RESTful API can be used on [Heroku](https://mv-shopping-cart-api.herokuapp.com/), see [usage](#usage) for details.
+
+Documentation on the source code can be found [here](https://michaelvaldron.ca/shopping-cart-api).
+
 ## Dependencies
 
 The following includes all base dependencies for running the API
