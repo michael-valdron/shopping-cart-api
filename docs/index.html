@@ -119,33 +119,33 @@
 					<li><code>PUT /api/v1/add</code>: Creates records in database for items and parent cart from JSON repersentation of a cart shown below:</li>
 				</ul>
 				<p><strong>With Discount</strong></p>
-				<pre><code class="language-json"><span style="color: #000000">{</span>
-<span style="color: #000000">    </span><span style="color: #0451A5">&quot;discount&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0.1</span><span style="color: #000000">, </span><span style="color: #008000">// 10%</span>
-<span style="color: #000000">    </span><span style="color: #0451A5">&quot;items&quot;</span><span style="color: #000000">: [</span>
+				<pre><code class="language-js"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;discount&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0.1</span><span style="color: #000000">, </span><span style="color: #008000">// 10%</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;items&quot;</span><span style="color: #000000">: [</span>
 <span style="color: #000000">        {</span>
-<span style="color: #000000">            </span><span style="color: #0451A5">&quot;label&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Milk&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">            </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">2.99</span>
+<span style="color: #000000">            </span><span style="color: #A31515">&quot;label&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Milk&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #A31515">&quot;price&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #098658">2.99</span>
 <span style="color: #000000">        },</span>
 <span style="color: #000000">        {</span>
-<span style="color: #000000">            </span><span style="color: #0451A5">&quot;label&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Cereal&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">            </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">3.99</span>
+<span style="color: #000000">            </span><span style="color: #A31515">&quot;label&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Cereal&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #A31515">&quot;price&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #098658">3.99</span>
 <span style="color: #000000">        },</span>
-<span style="color: #000000">        </span><span style="color: #CD3131">...</span>
+<span style="color: #000000">        ...</span>
 <span style="color: #000000">    ]</span>
 <span style="color: #000000">}</span>
 </code></pre>
 				<p><strong>Without Discount</strong></p>
-				<pre><code class="language-json"><span style="color: #000000">{</span>
-<span style="color: #000000">    </span><span style="color: #0451A5">&quot;items&quot;</span><span style="color: #000000">: [</span>
+				<pre><code class="language-js"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;items&quot;</span><span style="color: #000000">: [</span>
 <span style="color: #000000">        {</span>
-<span style="color: #000000">            </span><span style="color: #0451A5">&quot;label&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Milk&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">            </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">2.99</span>
+<span style="color: #000000">            </span><span style="color: #A31515">&quot;label&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Milk&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #A31515">&quot;price&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #098658">2.99</span>
 <span style="color: #000000">        },</span>
 <span style="color: #000000">        {</span>
-<span style="color: #000000">            </span><span style="color: #0451A5">&quot;label&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Cereal&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">            </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">3.99</span>
+<span style="color: #000000">            </span><span style="color: #A31515">&quot;label&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Cereal&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #A31515">&quot;price&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #098658">3.99</span>
 <span style="color: #000000">        },</span>
-<span style="color: #000000">        </span><span style="color: #CD3131">...</span>
+<span style="color: #000000">        ...</span>
 <span style="color: #000000">    ]</span>
 <span style="color: #000000">}</span>
 </code></pre>
@@ -156,26 +156,26 @@
 					called <code>tax</code> which contains all tax percentages to compute against the
 				<code>subtotal</code>.</p>
 				<ul>
-					<li><code>GET /api/v1/view/cart/id</code>: Fetches all unique identifiers of shopping carts from backend database and returns a JSON array response, example:<pre><code class="language-json"><span style="color: #000000">[</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #098658">4</span><span style="color: #000000">, </span><span style="color: #098658">5</span><span style="color: #000000">, </span><span style="color: #CD3131">...</span><span style="color: #000000">]</span>
+					<li><code>GET /api/v1/view/cart/id</code>: Fetches all unique identifiers of shopping carts from backend database and returns a JSON array response, example:<pre><code class="language-js"><span style="color: #000000">[</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #098658">4</span><span style="color: #000000">, </span><span style="color: #098658">5</span><span style="color: #000000">, ...]</span>
 </code></pre>
 					</li>
 				</ul>
 				<p><strong>Note</strong>: If cart records are not found, the above request will return an empty JSON array.</p>
 				<ul>
-					<li><code>GET /api/v1/view/cart/[id]</code>: Fetches a cart record by given unique identifier <code>id</code> from backend database and returns a JSON object with all data on cart record and an array of JSON object with data on all attached item records, example:<pre><code class="language-json"><span style="color: #000000">{</span>
-<span style="color: #000000">  </span><span style="color: #0451A5">&quot;id&quot;</span><span style="color: #000000">: </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #0451A5">&quot;subtotal&quot;</span><span style="color: #000000">: </span><span style="color: #098658">6.98</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #0451A5">&quot;discount&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #0451A5">&quot;taxes&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0.91</span><span style="color: #000000">, </span><span style="color: #008000">// Computed off of Canadian HST tax</span>
-<span style="color: #000000">  </span><span style="color: #0451A5">&quot;total&quot;</span><span style="color: #000000">: </span><span style="color: #098658">7.89</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #0451A5">&quot;items&quot;</span><span style="color: #000000">: [</span>
+					<li><code>GET /api/v1/view/cart/[id]</code>: Fetches a cart record by given unique identifier <code>id</code> from backend database and returns a JSON object with all data on cart record and an array of JSON object with data on all attached item records, example:<pre><code class="language-js"><span style="color: #000000">{</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;id&quot;</span><span style="color: #000000">: </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;subtotal&quot;</span><span style="color: #000000">: </span><span style="color: #098658">6.98</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;discount&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;taxes&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0.91</span><span style="color: #000000">, </span><span style="color: #008000">// Computed off of Canadian HST tax</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;total&quot;</span><span style="color: #000000">: </span><span style="color: #098658">7.89</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;items&quot;</span><span style="color: #000000">: [</span>
 <span style="color: #000000">      {</span>
-<span style="color: #000000">          </span><span style="color: #0451A5">&quot;label&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Milk&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">          </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">2.99</span>
+<span style="color: #000000">          </span><span style="color: #A31515">&quot;label&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Milk&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">          </span><span style="color: #A31515">&quot;price&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #098658">2.99</span>
 <span style="color: #000000">      },</span>
 <span style="color: #000000">      {</span>
-<span style="color: #000000">          </span><span style="color: #0451A5">&quot;label&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Cereal&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">          </span><span style="color: #0451A5">&quot;price&quot;</span><span style="color: #000000">: </span><span style="color: #098658">3.99</span>
+<span style="color: #000000">          </span><span style="color: #A31515">&quot;label&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Cereal&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">          </span><span style="color: #A31515">&quot;price&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #098658">3.99</span>
 <span style="color: #000000">      }</span>
 <span style="color: #000000">  ]</span>
 <span style="color: #000000">}</span>
@@ -190,8 +190,8 @@
 				<ul>
 					<li><code>POST /api/v1/edit/cart/[id]</code>: Updates a cart record by given unique identifier <code>id</code> and updated to values specified by a passed JSON object with their attributes. For updating carts only the <code>discount</code> attribute can be updated as others are prevented by constraint(s) or are calculated. Returns a JSON object with all data on cart record. Example of input data:</li>
 				</ul>
-				<pre><code class="language-json"><span style="color: #000000">{</span>
-<span style="color: #000000">    </span><span style="color: #0451A5">&quot;discount&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0.2</span><span style="color: #000000"> </span><span style="color: #008000">// updates current discount to 20%</span>
+				<pre><code class="language-js"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;discount&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0.2</span><span style="color: #000000"> </span><span style="color: #008000">// updates current discount to 20%</span>
 <span style="color: #000000">}</span>
 </code></pre>
 				<p><strong>Note</strong>: If the cart record is not found, the above request will return a
@@ -228,7 +228,7 @@
 				<p>When error responses happen, the following JSON object is returned:</p>
 				<pre><code class="language-json"><span style="color: #000000">{</span>
 <span style="color: #000000">    </span><span style="color: #0451A5">&quot;status&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;error&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #0451A5">&quot;message&quot;</span><span style="color: #000000">: </span><span style="color: #CD3131">&lt;error</span><span style="color: #000000"> </span><span style="color: #CD3131">message</span><span style="color: #000000"> </span><span style="color: #CD3131">with</span><span style="color: #000000"> </span><span style="color: #CD3131">details&gt;</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;message&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;&lt;error message with details&gt;&quot;</span>
 <span style="color: #000000">}</span>
 </code></pre>
 				<ul>
