@@ -44,28 +44,46 @@ Ensure there is a target PostgreSQL database running with the `DATABASE_URL` env
 To run service in development mode (watching for file changes) run the following:
 
 ```bash
-    yarn watch
+yarn watch
 ```
 
 To build production JavaScript for NodeJS deployment run the following:
 
 ```bash
-    yarn build
+yarn build
 ```
 
 To clean built production source run:
 
 ```bash
-    yarn clean
+yarn clean
 ```
 
 To run production service (in project folder) run:
 
 ```bash
-    yarn start
+yarn start
 ```
 
 **Note**: `yarn build` must be ran before `yarn start`.
+
+### Docker
+
+At this time, `docker` is only used to run a development PostgreSQL database using `docker-compose`.
+
+The following will launch a instance of a PostgreSQL container:
+
+```bash
+export PGPORT=<port_number>
+export PGPASSWORD=<password_for_postgres_user>
+docker-compose up -d
+```
+
+To stop and remove all launched instances run the following:
+
+```bash
+docker-compose down
+```
 
 ### API Requests
 
@@ -215,7 +233,7 @@ As with running the service, ensure there is a target PostgreSQL database runnin
 Unit tests can be ran using the following:
 
 ```
-    yarn test
+yarn test
 ```
 
 ## MIT Licence
