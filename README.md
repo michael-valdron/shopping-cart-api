@@ -109,8 +109,10 @@ At this time, `docker` is only used to run a development PostgreSQL database usi
 The following will launch a instance of a PostgreSQL container:
 
 ```bash
-export PGPORT=<port_number>
-export PGPASSWORD=<password_for_postgres_user>
+export PGPORT="<port_number>"
+
+export PGPASSWORD="<password_for_postgres_user>"
+
 docker-compose up -d
 ```
 
@@ -125,6 +127,7 @@ docker-compose down
 - `PUT /api/v1/add`: Creates records in database for items and parent cart from JSON repersentation of a cart shown below:
 
 **With Discount**
+
 ```js
 {
     "discount": 0.1, // 10%
@@ -143,6 +146,7 @@ docker-compose down
 ```
 
 **Without Discount**
+
 ```js
 {
     "items": [
@@ -158,6 +162,7 @@ docker-compose down
     ]
 }
 ```
+
 **Note**: When carts and items are created, unique identifiers are 
 generated within PostgeSQL. `subtotal` and `total` are calculated off
 of each item `price`, the total tax amount (`taxes`), and the discount
@@ -166,6 +171,7 @@ called `tax` which contains all tax percentages to compute against the
 `subtotal`.
 
 - `GET /api/v1/view/cart/id`: Fetches all unique identifiers of shopping carts from backend database and returns a JSON array response, example:
+
 ```js
 [1, 2, 3, 4, 5, ...]
 ```
@@ -173,6 +179,7 @@ called `tax` which contains all tax percentages to compute against the
 **Note**: If cart records are not found, the above request will return an empty JSON array.
 
 - `GET /api/v1/view/cart/[id]`: Fetches a cart record by given unique identifier `id` from backend database and returns a JSON object with all data on cart record and an array of JSON object with data on all attached item records, example:
+
 ```js
 {
     "id": 1,
@@ -206,12 +213,14 @@ called `tax` which contains all tax percentages to compute against the
     "discount": 0.2 // updates current discount to 20%
 }
 ```
+
 **Note**: If the cart record is not found, the above request will return a 
 404 error with a JSON object with details.
 
 - `POST /api/v1/edit/item/[id]`: Updates an item record by given unique identifier `id` and updated to values specified by a passed JSON object with their attributes. For updating items only the `label` and `price` attribute can be updated. Updating the `price` will also update the `subtotal`, `taxes`, and `total` attributes in the attached cart record. Returns a JSON object with all data on item record. Examples of input data:
 
 **Updating Label**
+
 ```json
 {
     "label": "Apple"
@@ -219,6 +228,7 @@ called `tax` which contains all tax percentages to compute against the
 ```
 
 **Updating Price**
+
 ```json
 {
     "price": 4.99
@@ -226,6 +236,7 @@ called `tax` which contains all tax percentages to compute against the
 ```
 
 **Updating Both**
+
 ```json
 {
     "label": "Apple",
