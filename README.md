@@ -35,6 +35,41 @@ Here is a list of environments variables to set:
 - `PGPORT` (For `docker-compose` DB only): Specifies the port number to use on PostgreSQL `docker` container.
 - `PGPASSWORD` (For `docker-compose` DB and DB access only): Specifies password to use for the `postgres` user in `docker` container, also allows for passwordless access to a `psql` connection for management.
 
+## Database Design
+
+### UML Diagram
+
+![UML Diagram](design/shoppingcart_diagram.svg)
+
+### Data Dictionary
+
+#### carts
+
+| Attributes | Type | Key | Description |
+|:----------:|:----:|:---:|-------------|
+|  cart_id   | INTEGER | PK | Unique identifier for a shopping cart. |
+| cart_subtotal | NUMERIC |  | Subtotal cost of all items (without discounts and taxes applied). |
+| cart_discount | NUMERIC |  | Discount percentage to be applied to cart total. |
+| cart_taxes | NUMERIC |  | Total tax cost for entire cart to be applied to total cost. |
+| cart_total | NUMERIC |  | Total cost of items (with discounts and taxes applied). |
+
+#### items
+
+| Attributes | Type | Key | Description |
+|:----------:|:----:|:---:|-------------|
+| item_id | INTEGER | PK | Unique identifier for a shopping cart item. |
+| cart_id | INTEGER | FK | Unique identifier for a shopping cart that contains item. |
+| item_label | VARCHAR |  | Label for identifing item (item name). |
+| item_price | NUMERIC |  | Cost of item (without discounts and taxes applied). |
+
+#### tax
+
+| Attributes | Type | Key | Description |
+|:----------:|:----:|:---:|-------------|
+| tax_id | INTEGER | PK | Unique identifier for a tax percentage. |
+| tax_label | VARCHAR |  | 3-letter label for tax percentage. |
+| tax_percent | NUMERIC |  | Tax percentage. |
+
 ## Usage
 
 ### Yarn Commands
