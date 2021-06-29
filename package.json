@@ -31,7 +31,7 @@
     "typescript": "^4.3.4"
   },
   "scripts": {
-    "doc": "typedoc",
+    "doc": "typedoc && mkdir docs/design && cp -r design/*.svg docs/design/",
     "build": "tsc",
     "start": "node dist/",
     "watch": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
