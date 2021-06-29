@@ -90,10 +90,132 @@
 				<p>Here is a list of environments variables to set:</p>
 				<ul>
 					<li><code>DATABASE_URL</code>: A URL to the backend PostgreSQL database for use by the APIs, example format: &#39;<code>postgres://[user]:[password]@[hostname]:[port]/[dbname]</code>&#39;</li>
-					<li><code>SSL</code> (Optional): If set to any value, the API service will use an SSL enabled connection to <code>DATABASE_URL</code> specified.</li>
+					<li><code>DATABASE_SSL</code> (Optional): If set to any value, the API service will use an SSL enabled connection to <code>DATABASE_URL</code> specified.</li>
+					<li><code>WEB_CONCURRENCY</code>: Specifies an integer which indicates the number of web listeners to run at once, if not specified only one listener will run.</li>
 					<li><code>PGPORT</code> (For <code>docker-compose</code> DB only): Specifies the port number to use on PostgreSQL <code>docker</code> container.</li>
 					<li><code>PGPASSWORD</code> (For <code>docker-compose</code> DB and DB access only): Specifies password to use for the <code>postgres</code> user in <code>docker</code> container, also allows for passwordless access to a <code>psql</code> connection for management.</li>
 				</ul>
+				<a href="#database-design" id="database-design" style="color: inherit; text-decoration: none;">
+					<h2>Database Design</h2>
+				</a>
+				<a href="#uml-diagram" id="uml-diagram" style="color: inherit; text-decoration: none;">
+					<h3>UML Diagram</h3>
+				</a>
+				<p><img src="design/shoppingcart_diagram.svg" alt="UML Diagram"></p>
+				<a href="#data-dictionary" id="data-dictionary" style="color: inherit; text-decoration: none;">
+					<h3>Data Dictionary</h3>
+				</a>
+				<a href="#carts" id="carts" style="color: inherit; text-decoration: none;">
+					<h4>carts</h4>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th align="center">Attributes</th>
+							<th align="center">Type</th>
+							<th align="center">Key</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="center">cart_id</td>
+							<td align="center">INTEGER</td>
+							<td align="center">PK</td>
+							<td>Unique identifier for a shopping cart.</td>
+						</tr>
+						<tr>
+							<td align="center">cart_subtotal</td>
+							<td align="center">NUMERIC</td>
+							<td align="center"></td>
+							<td>Subtotal cost of all items (without discounts and taxes applied).</td>
+						</tr>
+						<tr>
+							<td align="center">cart_discount</td>
+							<td align="center">NUMERIC</td>
+							<td align="center"></td>
+							<td>Discount percentage to be applied to cart total.</td>
+						</tr>
+						<tr>
+							<td align="center">cart_taxes</td>
+							<td align="center">NUMERIC</td>
+							<td align="center"></td>
+							<td>Total tax cost for entire cart to be applied to total cost.</td>
+						</tr>
+						<tr>
+							<td align="center">cart_total</td>
+							<td align="center">NUMERIC</td>
+							<td align="center"></td>
+							<td>Total cost of items (with discounts and taxes applied).</td>
+						</tr>
+				</tbody></table>
+				<a href="#items" id="items" style="color: inherit; text-decoration: none;">
+					<h4>items</h4>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th align="center">Attributes</th>
+							<th align="center">Type</th>
+							<th align="center">Key</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="center">item_id</td>
+							<td align="center">INTEGER</td>
+							<td align="center">PK</td>
+							<td>Unique identifier for a shopping cart item.</td>
+						</tr>
+						<tr>
+							<td align="center">cart_id</td>
+							<td align="center">INTEGER</td>
+							<td align="center">FK</td>
+							<td>Unique identifier for a shopping cart that contains item.</td>
+						</tr>
+						<tr>
+							<td align="center">item_label</td>
+							<td align="center">VARCHAR</td>
+							<td align="center"></td>
+							<td>Label for identifing item (item name).</td>
+						</tr>
+						<tr>
+							<td align="center">item_price</td>
+							<td align="center">NUMERIC</td>
+							<td align="center"></td>
+							<td>Cost of item (without discounts and taxes applied).</td>
+						</tr>
+				</tbody></table>
+				<a href="#tax" id="tax" style="color: inherit; text-decoration: none;">
+					<h4>tax</h4>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th align="center">Attributes</th>
+							<th align="center">Type</th>
+							<th align="center">Key</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="center">tax_id</td>
+							<td align="center">INTEGER</td>
+							<td align="center">PK</td>
+							<td>Unique identifier for a tax percentage.</td>
+						</tr>
+						<tr>
+							<td align="center">tax_label</td>
+							<td align="center">VARCHAR</td>
+							<td align="center"></td>
+							<td>3-letter label for tax percentage.</td>
+						</tr>
+						<tr>
+							<td align="center">tax_percent</td>
+							<td align="center">NUMERIC</td>
+							<td align="center"></td>
+							<td>Tax percentage.</td>
+						</tr>
+				</tbody></table>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
 				</a>
@@ -102,18 +224,30 @@
 				</a>
 				<p>Ensure there is a target PostgreSQL database running with the <code>DATABASE_URL</code> environment variable set to its url <strong>before</strong> running API service, <em>even in development</em>.</p>
 				<p>To run service in development mode (watching for file changes) run the following:</p>
-				<pre><code class="language-bash"><span style="color: #000000">    yarn watch</span>
+				<pre><code class="language-bash"><span style="color: #000000">yarn watch</span>
 </code></pre>
 				<p>To build production JavaScript for NodeJS deployment run the following:</p>
-				<pre><code class="language-bash"><span style="color: #000000">    yarn build</span>
+				<pre><code class="language-bash"><span style="color: #000000">yarn build</span>
 </code></pre>
 				<p>To clean built production source run:</p>
-				<pre><code class="language-bash"><span style="color: #000000">    yarn clean</span>
+				<pre><code class="language-bash"><span style="color: #000000">yarn clean</span>
 </code></pre>
 				<p>To run production service (in project folder) run:</p>
-				<pre><code class="language-bash"><span style="color: #000000">    yarn start</span>
+				<pre><code class="language-bash"><span style="color: #000000">yarn start</span>
 </code></pre>
 				<p><strong>Note</strong>: <code>yarn build</code> must be ran before <code>yarn start</code>.</p>
+				<a href="#docker" id="docker" style="color: inherit; text-decoration: none;">
+					<h3>Docker</h3>
+				</a>
+				<p>At this time, <code>docker</code> is only used to run a development PostgreSQL database using <code>docker-compose</code>.</p>
+				<p>The following will launch a instance of a PostgreSQL container:</p>
+				<pre><code class="language-bash"><span style="color: #0000FF">export</span><span style="color: #000000"> PGPORT=&lt;port_number&gt;</span>
+<span style="color: #0000FF">export</span><span style="color: #000000"> PGPASSWORD=&lt;password_for_postgres_user&gt;</span>
+<span style="color: #000000">docker-compose up -d</span>
+</code></pre>
+				<p>To stop and remove all launched instances run the following:</p>
+				<pre><code class="language-bash"><span style="color: #000000">docker-compose down</span>
+</code></pre>
 				<a href="#api-requests" id="api-requests" style="color: inherit; text-decoration: none;">
 					<h3>API Requests</h3>
 				</a>
@@ -251,7 +385,7 @@
 				</a>
 				<p>As with running the service, ensure there is a target PostgreSQL database running with the <code>DATABASE_URL</code> environment variable set to its url <strong>before</strong> running the tests.</p>
 				<p>Unit tests can be ran using the following:</p>
-				<pre><code><span style="color: #000000">    </span><span style="color: #001080">yarn</span><span style="color: #000000"> </span><span style="color: #001080">test</span>
+				<pre><code><span style="color: #001080">yarn</span><span style="color: #000000"> </span><span style="color: #001080">test</span>
 </code></pre>
 				<a href="#mit-licence" id="mit-licence" style="color: inherit; text-decoration: none;">
 					<h2>MIT Licence</h2>
